@@ -1,0 +1,28 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/kronton/restrection_ws/devel_isolated/virtual_costmap_layer/include/**",
+        "/home/kronton/cartographer_ws/install_isolated/include/**",
+        "/home/kronton/pura_ws/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/kronton/pura_ws/src/PURA_simulation/realsense_ros_gazebo/include/**",
+        "/home/kronton/pura_ws/src/RestrictAreaPlugin/RestrictAreaPLugin/restricted_layer/include/**",
+        "/home/kronton/course_ws/src/RS_robot/rsrobot_description/include/**",
+        "/home/kronton/restrection_ws/src/virtual_costmap_layer-AT1/include/**",
+        "/home/kronton/pura_ws/src/virtual_costmap_pose/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

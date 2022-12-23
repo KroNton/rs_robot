@@ -16,7 +16,7 @@
 
 
   <!-- World File -->
-  <arg name="world_file" default="$(find rsrobot_description)worlds/costa_coffee.world"/>
+  <arg name="world_file" default="$(find rsrobot_gazebo)worlds/costa_coffee.world"/>
 
   <!-- Launch Gazebo World -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
