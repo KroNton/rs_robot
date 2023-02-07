@@ -3,8 +3,8 @@
       <!--- Depth image to laser scan -->
   <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan" >
       <param name="scan_height" value="3"/> 
-      <param name="output_frame_id" value="kinect_link"/>
-      <remap from="image" to="/kinect/depth/image_raw" />
-      <remap from="camera_info" to="/kinect/depth/camera_info" />
+      <param name="output_frame_id" value="camera_link"/>
+      <remap from="image" to="/camera/depth_registered/image_raw" />
+      <remap from="camera_info" to="/camera/depth/camera_info" />
   </node>
 </launch>  
