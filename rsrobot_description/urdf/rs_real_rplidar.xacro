@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="barista_kobuki" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find rsrobot_description)/urdf/common_properties.urdf.xacro"/>
+  <xacro:include filename="$(find rsrobot_description)/urdf/barista.gazebo"/>
+
+                       <!-- Kobuki --> 
+    <link name="base_footprint"/>
+    <joint name="base_joint" type="fixed">
+      <origin xyz="0 0 0.0" rpy="0 0 0" />
+      <parent link="base_footprint"/>
+      <child link="base_link" />
+    </joint>
+    <link name="base_link">
+      <visual>
+        <geometry>
+          <!-- new mesh -->
+          <cylinder length="0.22" radius="${0.235/2}"/>
+          <!-- <mesh filename="package://rsrobot_description/meshes/barista/BOTTOM_colour.dae" /> -->
+        </geometry>
+        <origin xyz="0.001 0 0.05199" rpy="0 0 0"/>
+        <material name="base_lcolor">
+          <color rgba="0.0 0.20 1.0 1.0"/>
+          <texture filename=""/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.10938" radius="0.178"/>
+        </geometry>
+        <origin xyz="0.0 0 0.05949" rpy="0 0 0"/>
+      </collision>
+      <inertial>
+        <!-- COM experimentally determined -->
+        <origin xyz="0.01 0 0"/>
+        <mass value="2.4"/> <!-- 2.4/2.6 kg for small/big battery pack -->
+        <inertia ixx="0.019995" ixy="0.0" ixz="0.0"
+                 iyy="0.019995" iyz="0.0" 
+                 izz="0.03675" />
+      </inertial>
+    </link>
+
+
+    <joint name="wheel_left_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="wheel_left_link"/>
+      <origin xyz="0.00 ${0.25/2} -0.05" rpy="${-M_PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="wheel_left_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://rsrobot_description/meshes/wheel.dae"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.0206" radius="0.0352"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0" 
+                 izz="0.001" />
+      </inertial>
+    </link>
+    
+    <joint name="wheel_right_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="wheel_right_link"/>
+      <origin xyz="0.00 -${0.25/2} -0.05" rpy="${-M_PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
+    </joint>
+
+    <link name="wheel_right_link">
+      <visual>
+        <geometry>
+          <mesh filename="package://rsrobot_description/meshes/wheel.dae"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length="0.0206" radius="0.0350"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0" 
+                 izz="0.001" />
+      </inertial>
+    </link>
+    
+    <joint name="caster_front_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="caster_front_link"/>
+      <origin xyz="0.05 0.0 -0.06" rpy="${-M_PI/2} 0 0"/>
+    </joint>
+
+    <link name="caster_front_link">
+      <visual>
+        <geometry>
+          <sphere radius="0.02"/> 
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </visual> 
+      <collision>
+        <geometry>
+          <sphere radius="0.02"/> 
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>      
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0" 
+                 izz="0.001" />
+      </inertial>
+    </link>
+    
+    <joint name="caster_back_joint" type="fixed">
+      <parent link="base_link"/>
+      <child link="caster_back_link"/>
+      <origin xyz="-0.05 0.0 -0.06" rpy="${-M_PI/2} 0 0"/>
+    </joint>
+    <link name="caster_back_link">
+      <visual>
+        <geometry>
+          <sphere radius="0.02"/> 
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </visual> 
+      <collision>
+        <geometry>
+          <sphere radius="0.02"/> 
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>      
+      <inertial>
+        <mass value="0.01" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+                 iyy="0.001" iyz="0.0" 
+                 izz="0.001" />
+      </inertial>
+    </link> 
+
+ <link name="lidar_link">
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <mass value="0.1"/>
+        <inertia ixx="1e-6" ixy="0.0" ixz="0.0" iyy="1e-6" iyz="0.0" izz="1e-6"/>
+      </inertial>
+      <visual name="lidar_visual">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+          <mesh filename="package://rsrobot_description/meshes/lidar_link.STL"/>
+        </geometry>
+        <!-- <material name="white"/> -->
+      </visual>
+      <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+          <box size="0.05 0.05 0.05"/>
+        </geometry>
+      </collision>
+    </link>
+
+  <joint
+    name="lidar_joint"
+    type="fixed">
+    <origin
+      xyz="0.06 0 0.19"
+      rpy="1.5708 0 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="lidar_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+    
+    <joint name="laser_data_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 -1.5707 -1.5707"/>
+      <parent link="lidar_link"/>
+      <child link="laser_data_link"/>
+    </joint>
+
+    <link name="laser_data_link">
+    </link>
+
+
+  <link name="imu_link">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.0"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+    <visual name="">
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="0.03 0.03 0.01"/>
+      </geometry>
+      <material name="">
+        <color rgba="1.0 0.0 0.0 1.0"/>
+        <texture filename=""/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="0.03 0.03 0.01"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="imu_joint" type="fixed">
+    <origin xyz="0.09 0.0 0.084" rpy="1.5707 0 0"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <axis xyz="0.0 0.0 0.0"/>
+  </joint>
+
+</robot>
